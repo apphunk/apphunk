@@ -5,11 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "apphunk"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "treas@dynamicdudes.com"
-    gem.homepage = "http://github.com/apphunk/apphunk"
-    gem.authors = ["rubyphunk"]
+    gem.summary = %Q{A library to send messages to Apphunk.com}
+    gem.description = %Q{Apphunk is a library that allows your applications (currently only Ruby AND Rails) to send messages to Apphunk.com}
+    gem.email = "andreas@apphunk.com"
+    gem.homepage = "http://apphunk.com"
+    gem.authors = ["Andreas Wolff"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
     gem.add_dependency "json"
