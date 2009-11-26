@@ -13,6 +13,12 @@ describe Apphunk::Proxy do
       Apphunk::Proxy.send_message_to_apphunkd("My Message", @opts)
     end
     
+    it "should return false if options include allowed environments and the current environment isn't included in that list" do
+      @opts[:environments] = ['production', 'staging']
+      @opts[:environment] = 'development'
+      Apphunk::Proxy.send_message_to_apphunkd("My Message", @opts).should be_false
+    end
+    
     context 'posting' do
       before(:each) do
         @payload = { "prepared" => "payload" }
@@ -66,15 +72,15 @@ describe Apphunk::Proxy do
     
     it 'should create an OpenStruct, containing the message and extracted options' do
       payload = Apphunk::Proxy.prepare_payload("My Message", @opts)
-      payload.message.should == "My Message"
-      payload.token.should == "secret"
-      payload.environment.should == "development"
-      payload.tags.should == "test"
+      payload[:message].should == "My Message"
+      payload[:token].should == "secret"
+      payload[:environment].should == "development"
+      payload[:tags].should == "test"
     end
     
     it 'should render the trails to json' do
       payload = Apphunk::Proxy.prepare_payload("My Message", @opts)
-      payload.trails.should == "{\"user\":\"5\"}"
+      payload[:trails].should == "{\"user\":\"5\"}"
     end
   end  
 end

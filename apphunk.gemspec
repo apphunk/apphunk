@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{apphunk}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["rubyphunk"]
-  s.date = %q{2009-11-20}
-  s.description = %q{TODO: longer description of your gem}
-  s.email = %q{treas@dynamicdudes.com}
+  s.authors = ["Andreas Wolff"]
+  s.date = %q{2009-11-26}
+  s.description = %q{Apphunk is a library that allows your applications (currently only Ruby AND Rails) to send messages to Apphunk.com}
+  s.email = %q{andreas@apphunk.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
      "Rakefile",
      "TODO.rdoc",
      "VERSION",
+     "apphunk.gemspec",
      "lib/apphunk.rb",
+     "lib/apphunk/config.rb",
      "lib/apphunk/logger.rb",
      "lib/apphunk/proxy.rb",
      "lib/apphunk/remote.rb",
@@ -36,11 +38,11 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/apphunk/apphunk}
+  s.homepage = %q{http://apphunk.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{A library to send messages to Apphunk.com}
   s.test_files = [
     "spec/apphunk/proxy_spec.rb",
      "spec/apphunk_spec.rb",

@@ -8,6 +8,10 @@ module Apphunk
       PROXY_API_URL = "http://127.0.0.1:8212/api/messages"
       
       def send_message_to_apphunkd(message, options)
+        if options[:environments] && options[:environment] && !options[:environments].include?(options[:environment])
+          return false
+        end
+        
         payload = prepare_payload(message, options)
         result = Apphunk::Remote.post(PROXY_API_URL, payload, 3)
         return process_response(result)
@@ -28,11 +32,11 @@ module Apphunk
           if result.response.code == '201'
             return true
           else
-            Apphunk::Logger.error "The Apphunkd Proxy couldn't store the message: #{result.response.code} / #{result.response.body}"
+            Apphunk::Logger.error "The Apphunkd-Proxy couldn't store the message: #{result.response.code} / #{result.response.body}"
             return false
           end
         else
-          Apphunk::Logger.error "Connection Error: Could not get a response from Apphunkd in time"
+          Apphunk::Logger.error "Connection Error: Could not get a response from local Apphunkd-Proxy in time"
           return false
         end
       end
