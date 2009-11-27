@@ -28,6 +28,29 @@
     <div id="bodyContent">
         <div id="content">
     
+    <div class="description">
+        <p>
+Used to configure the behaviour of <a href="../Apphunk.html">Apphunk</a>
+and its outgoing messages. Each option can be overriden by <a
+href="../Apphunk.html#M000006">Apphunk.log</a>&#8217;s <tt>option</tt>
+parameter. If <a href="../Apphunk.html">Apphunk</a> is used as part of a
+Rails application, the configuration should go to
+<tt>config/initializers/apphunk.rb</tt>.
+</p>
+<p>
+<b>Note</b>: The configuration must be set using <a
+href="../Apphunk.html#M000008">Apphunk.config</a> as shown in the example
+below.
+</p>
+<h4>Example</h4>
+<pre>
+ Apphunk.config do |config|
+   config.token = &quot;secret_project_token&quot;
+ end
+</pre>
+
+    </div>
+    
 
     
 
@@ -54,7 +77,14 @@
                 [RW]
             </td>
             <td class='attr-name'>environment</td>
-            <td class='attr-desc'></td>
+            <td class='attr-desc'><p>
+The current environment. Automatically retrieved if <a
+href="../Apphunk.html">Apphunk</a> is running as part of a Rails app.
+</p>
+<h4>Example</h4>
+<pre>
+ config.environment = 'production'
+</pre></td>
         </tr>
         
         <tr valign='top'>
@@ -62,7 +92,32 @@
                 [RW]
             </td>
             <td class='attr-name'>environments</td>
-            <td class='attr-desc'></td>
+            <td class='attr-desc'><p>
+A list of allowed environments. <a href="../Apphunk.html">Apphunk</a> will
+only send messages if <a
+href="Config.html#environment">Apphunk::Config.environment</a> is part of
+these allowed environments. <b>Note</b>: This step is skipped if <a
+href="Config.html#environment">Apphunk::Config.environment</a> is
+<tt>empty</tt>.
+</p>
+<h4>Example</h4>
+<pre>
+ config.environments = %w(production staging)
+</pre></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>tags</td>
+            <td class='attr-desc'><p>
+A list of tags to be send with each message.
+</p>
+<h4>Example</h4>
+<pre>
+ config.tags = 'each, message, will, get, these, tags'
+</pre></td>
         </tr>
         
         <tr valign='top'>
@@ -70,7 +125,28 @@
                 [RW]
             </td>
             <td class='attr-name'>token</td>
-            <td class='attr-desc'></td>
+            <td class='attr-desc'><p>
+The token as provided by apphunk.com. Used to authenticate a message
+request.
+</p>
+<h4>Example</h4>
+<pre>
+ config.token = 'secrect_project_token'
+</pre></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>trails</td>
+            <td class='attr-desc'><p>
+A list of trails to be send with each message.
+</p>
+<h4>Example</h4>
+<pre>
+ config.trails = { :product =&gt; 'Car', :country =&gt; 'Germany' }
+</pre></td>
         </tr>
         
     </table>

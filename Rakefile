@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "apphunk"
-    gem.summary = %Q{A library to send messages to Apphunk.com}
+    gem.summary = %Q{A library that send's messages to Apphunk.com}
     gem.description = %Q{Apphunk is a library that allows your applications (currently only Ruby AND Rails) to send messages to Apphunk.com}
     gem.email = "andreas@apphunk.com"
     gem.homepage = "http://apphunk.com"
