@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{apphunk}
-  s.version = "0.1.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andreas Wolff"]
-  s.date = %q{2009-11-26}
+  s.date = %q{2009-12-14}
   s.description = %q{Apphunk is a library that allows your applications (currently only Ruby AND Rails) to send messages to Apphunk.com}
   s.email = %q{andreas@apphunk.com}
   s.extra_rdoc_files = [
@@ -26,6 +26,37 @@ Gem::Specification.new do |s|
      "TODO.rdoc",
      "VERSION",
      "apphunk.gemspec",
+     "doc/apple-touch-icon.png",
+     "doc/classes/Apphunk.html",
+     "doc/classes/Apphunk/Config.html",
+     "doc/classes/Apphunk/Logger.html",
+     "doc/classes/Apphunk/Proxy.html",
+     "doc/classes/Apphunk/Remote.html",
+     "doc/classes/Apphunk/Remote/Result.html",
+     "doc/created.rid",
+     "doc/css/main.css",
+     "doc/css/panel.css",
+     "doc/css/reset.css",
+     "doc/favicon.ico",
+     "doc/files/LICENSE.html",
+     "doc/files/README_rdoc.html",
+     "doc/files/lib/apphunk/config_rb.html",
+     "doc/files/lib/apphunk/logger_rb.html",
+     "doc/files/lib/apphunk/proxy_rb.html",
+     "doc/files/lib/apphunk/remote/result_rb.html",
+     "doc/files/lib/apphunk/remote_rb.html",
+     "doc/files/lib/apphunk_rb.html",
+     "doc/i/arrows.png",
+     "doc/i/results_bg.png",
+     "doc/i/tree_bg.png",
+     "doc/index.html",
+     "doc/js/jquery-1.3.2.min.js",
+     "doc/js/jquery-effect.js",
+     "doc/js/main.js",
+     "doc/js/searchdoc.js",
+     "doc/panel/index.html",
+     "doc/panel/search_index.js",
+     "doc/panel/tree.js",
      "lib/apphunk.rb",
      "lib/apphunk/config.rb",
      "lib/apphunk/logger.rb",
@@ -42,7 +73,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{A library to send messages to Apphunk.com}
+  s.summary = %q{A library that send's messages to Apphunk.com}
   s.test_files = [
     "spec/apphunk/proxy_spec.rb",
      "spec/apphunk_spec.rb",

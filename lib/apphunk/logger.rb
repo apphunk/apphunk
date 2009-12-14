@@ -5,9 +5,9 @@ module Apphunk
       def error(message)
         message = "[Apphunk] Error: #{message}"
         case
-          when Rails && Rails.logger
+          when defined?(Rails) && Rails.logger
             Rails.logger.error(message)
-          when RAILS_DEFAULT_LOGGER
+          when defined?(RAILS_DEFAULT_LOGGER)
             RAILS_DEFAULT_LOGGER.error(message)
           else
             puts(message)

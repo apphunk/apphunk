@@ -67,12 +67,13 @@ module Apphunk
     #
     def config(&block)
       yield Apphunk::Config
+      self.default_options ||= {}
       self.default_options[:tags] = Apphunk::Config.tags
       self.default_options[:token] = Apphunk::Config.token
       self.default_options[:trails] = Apphunk::Config.trails
       self.default_options[:environments] = Apphunk::Config.environments
       
-      if Apphunk::Config.environment.blank?
+      if Apphunk::Config.environment.nil? || Apphunk::Config.environment == ""
         Apphunk::Config.environment = self.default_options[:environment]
       else
         self.default_options[:environment] = Apphunk::Config.environment 
