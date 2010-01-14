@@ -1,6 +1,6 @@
 = apphunk
 
-A library that send's messages to the remote logging service apphunk.com.
+A library that posts messages to the remote logging service apphunk.com.
 
 
 == Note on Patches/Pull Requests

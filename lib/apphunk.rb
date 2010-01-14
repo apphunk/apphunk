@@ -9,7 +9,7 @@ module Apphunk
   
   class << self
 
-    # Default options to be used for Apphunk.log. Initialized by Apphunk::Config.
+    # Default options to be used for Apphunk.post. Initialized by Apphunk::Config.
     attr_accessor :default_options
     
     # Sends a +message+ to your remote inbox at apphunk.com
@@ -21,18 +21,18 @@ module Apphunk
     #
     # ==== Examples  
     #   
-    #  Apphunk.log("Yet another hello world")
-    #  Apphunk.log("Tag me baby", :tags => 'apphunk, doc, examples', :trails => { :user_id => 5 })
-    #  Apphunk.log("I'm on my way to a different project", :token => 'secret_project_access_token')
+    #  Apphunk.post("Yet another hello world")
+    #  Apphunk.post("Tag me baby", :tags => 'apphunk, doc, examples', :trails => { :user_id => 5 })
+    #  Apphunk.post("I'm on my way to a different project", :token => 'secret_project_access_token')
     #
-    def log(message, options = {})
+    def post(message, options = {})
       options = (self.default_options || {}).merge(options)
       Apphunk::Proxy.send_message_to_apphunkd(message, options)
     end
     
     # Send messages with predefined options in a block
     #
-    # Yields the Apphunk module which can be used to send messages via Apphunk.log,
+    # Yields the Apphunk module which can be used to send messages via Apphunk.post,
     # but temporarily merges the provided +options+ with Apphunk.default_options.
     # Can be used to send a bunch of messages with the same options.
     #
@@ -41,12 +41,12 @@ module Apphunk
     # For a list of available options see Apphunk::Config.
     #
     # ==== Examples  
-    #  Apphunk.log_with_options(:tags => 'hello world') do |apphunk|
-    #    apphunk.log("A messages with tags")
-    #    apphunk.log("Another messages with the same tags")
+    #  Apphunk.post_with_options(:tags => 'hello world') do |apphunk|
+    #    apphunk.post("A messages with tags")
+    #    apphunk.post("Another messages with the same tags")
     #  end
     #
-    def log_with_options(options = {}, &block)
+    def post_with_options(options = {}, &block)
       preserved_defaults = self.default_options
       self.default_options = (self.default_options || {}).merge(options)
       yield self
