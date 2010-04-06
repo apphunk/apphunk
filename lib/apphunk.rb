@@ -71,7 +71,10 @@ module Apphunk
       self.default_options[:tags] = Apphunk::Config.tags
       self.default_options[:token] = Apphunk::Config.token
       self.default_options[:trails] = Apphunk::Config.trails
-      self.default_options[:environments] = Apphunk::Config.environments
+      
+      unless Apphunk::Config.environments.nil?
+        self.default_options[:environments] = Apphunk::Config.environments
+      end
       
       if Apphunk::Config.environment.nil? || Apphunk::Config.environment == ""
         Apphunk::Config.environment = self.default_options[:environment]
@@ -80,5 +83,29 @@ module Apphunk
       end
     end
     
+    # Init configuration defaults
+    def init_defaults #:nodoc:
+      if env = rails_environment
+        Apphunk.default_options = { 
+          :environment => env,
+          :environments => %w(production)
+        }
+      end
+    end
+    
+    # Get the current rails environment if its Rails
+    def rails_environment #:nodoc:
+      case
+      when defined?(RAILS_ENV)
+        RAILS_ENV
+      when defined?(Rails.env)
+        Rails.env
+      else
+        nil
+      end
+    end
   end
+  
 end
+
+Apphunk.init_defaults
