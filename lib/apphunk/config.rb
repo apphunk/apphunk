@@ -1,6 +1,6 @@
 module Apphunk
   
-  # Used to configure the behaviour of Apphunk and its outgoing messages. Each option can be overriden by Apphunk.log's +option+ parameter.
+  # Used to configure the behaviour of Apphunk and its outgoing messages. Each option can be overriden by Apphunk.post's +option+ parameter.
   # If Apphunk is used as part of a Rails application, the configuration should go to +config/initializers/apphunk.rb+.
   #
   # *Note*: The configuration must be set using Apphunk.config as shown in the example below.

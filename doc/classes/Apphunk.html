@@ -104,7 +104,7 @@
             <td class='attr-name'>default_options</td>
             <td class='attr-desc'><p>
 Default options to be used for <a
-href="Apphunk.html#M000006">Apphunk.log</a>. Initialized by <a
+href="Apphunk.html#M000006">Apphunk.post</a>. Initialized by <a
 href="Apphunk/Config.html">Apphunk::Config</a>.
 </p></td>
         </tr>
@@ -199,9 +199,9 @@ href="Apphunk/Config.html">Apphunk::Config</a>.
 </p>
 <h4>Examples</h4>
 <pre>
- Apphunk.log(&quot;Yet another hello world&quot;)
- Apphunk.log(&quot;Tag me baby&quot;, :tags =&gt; 'apphunk, doc, examples', :trails =&gt; { :user_id =&gt; 5 })
- Apphunk.log(&quot;I'm on my way to a different project&quot;, :token =&gt; 'secret_project_access_token')
+ Apphunk.post(&quot;Yet another hello world&quot;)
+ Apphunk.post(&quot;Tag me baby&quot;, :tags =&gt; 'apphunk, doc, examples', :trails =&gt; { :user_id =&gt; 5 })
+ Apphunk.post(&quot;I'm on my way to a different project&quot;, :token =&gt; 'secret_project_access_token')
 </pre>
 
                 </div>
@@ -240,7 +240,7 @@ Send messages with predefined options in a block
 </p>
 <p>
 Yields the <a href="Apphunk.html">Apphunk</a> module which can be used to
-send messages via <a href="Apphunk.html#M000006">Apphunk.log</a>, but
+send messages via <a href="Apphunk.html#M000006">Apphunk.post</a>, but
 temporarily merges the provided <tt>options</tt> with <a
 href="Apphunk.html#default_options">Apphunk.default_options</a>. Can be
 used to send a bunch of messages with the same options.
@@ -257,7 +257,7 @@ href="Apphunk/Config.html">Apphunk::Config</a>.
 </p>
 <h4>Examples</h4>
 <pre>
- Apphunk.log_with_options(:tags =&gt; 'hello world') do |apphunk|
+ Apphunk.post_with_options(:tags =&gt; 'hello world') do |apphunk|
    apphunk.log(&quot;A messages with tags&quot;)
    apphunk.log(&quot;Another messages with the same tags&quot;)
  end
