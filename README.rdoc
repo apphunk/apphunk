@@ -2,15 +2,58 @@
 
 A library that posts messages to the remote logging service apphunk.com.
 
+== Setup
+
+Make sure you have a running instance of apphunkd on your machine:
+  gem install apphunkd
+  apphunkd start
+  
+The daemon acts as a proxy between your app(s) and apphunk.com. 
+It comes with init.d and monit scripts so you may want to check out its documentation: http://github.com/apphunk/apphunkd
+
+Add the gem as dependency if you are on Rails 2.x
+  config.gem "apphunk"
+
+or add it to you Gemfile for Rails 3 and pure Ruby:
+  gem "apphunk"
+
+
+== Configuration
+
+Use the Apphunk.config method to configure the behaviour of the Gem and its outgoing messages. (Note: Each option can be overriden by Apphunk.post’s option parameter.) 
+If the Gem is used as part of a Rails application, the configuration should go to config/initializers/apphunk.rb.
+
+  Apphunk.config do |config|
+    config.token = "secret_project_token"
+  end
+
+For more information about the available configuration options, check the Rdoc: http://rdoc.info/projects/apphunk/apphunk (Apphunk::Config class).
+
+== Usage
+
+Sending messages is as easy as:
+  
+  Apphunk.post("Hello World")
+
+or 
+
+  Apphunk.post("Do you like my tags?", :tags => 'hello, world, messages')
+
+As noted above, each configuration option (Apphunk::Config) can be explicitly specified while posting a message:
+
+  Apphunk.post("Posting to another project", :token => 'another_projects_token')
+
+
+More details: http://rdoc.info/projects/apphunk/apphunk (Apphunk class)
 
 == Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a future version unintentionally.
+* Add specs for it. This is important so I don't break it in a future version unintentionally.
 * Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Get bonus points for topic branches.
 
 == Copyright
 
-Copyright (c) 2009 rubyphunk. See LICENSE for details.
+Copyright (c) 2009 Andreas Wolff. See LICENSE for details.

@@ -1,0 +1,5 @@
+== 0.4.1 / 06.04.2010
+
+* Added: Support for Rails 3 (#rails)
+* Fixed: Prefill the list of allowed environments with 'production' if not specified via configuration (#rails)
+* Fixed: Obsolete Apphunk.log pointer in specs and docs
