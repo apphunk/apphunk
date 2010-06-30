@@ -4,18 +4,17 @@ A library that posts messages to the remote logging service apphunk.com.
 
 == Setup
 
-Make sure you have a running instance of apphunkd on your machine:
-  gem install apphunkd
-  apphunkd start
-  
-The daemon acts as a proxy between your app(s) and apphunk.com. 
-It comes with init.d and monit scripts so you may want to check out its documentation: http://github.com/apphunk/apphunkd
+=== Rails 3.x
 
-Add the gem as dependency if you are on Rails 2.x
+  gem "apphunk"
+
+=== Rails 2.x
+
   config.gem "apphunk"
 
-or add it to you Gemfile for Rails 3 and pure Ruby:
-  gem "apphunk"
+=== Pure Ruby
+
+  require 'apphunk'
 
 
 == Configuration
