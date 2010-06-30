@@ -4,12 +4,13 @@ describe Apphunk::Proxy do
   describe 'send_message_to_apphunkd_proxy' do
     before(:each) do
       @opts = { :tags => 'test', :token => 'secret' }
-      Apphunk::Remote.stub!(:post)
+      @payload = { :token => 'secret' }
       Apphunk::Proxy.stub!(:process_response).and_return(true)
+      Postbox.stub!(:post)
     end
     
     it 'should prepare the payload' do
-      Apphunk::Proxy.should_receive(:prepare_payload).with("My Message", @opts)
+      Apphunk::Proxy.should_receive(:prepare_payload).with("My Message", @opts).and_return(@payload)
       Apphunk::Proxy.send_message_to_apphunkd("My Message", @opts)
     end
     
@@ -21,17 +22,12 @@ describe Apphunk::Proxy do
     
     context 'posting' do
       before(:each) do
-        @payload = { "prepared" => "payload" }
+        @payload = { :prepared => "payload", :token => "secret" }
         Apphunk::Proxy.stub!(:prepare_payload).and_return(@payload)
       end
       
-      it 'should post the payload to the local Apphunkd api' do
-        Apphunk::Remote.should_receive(:post).with('http://127.0.0.1:8212/api/messages', @payload, anything)
-        Apphunk::Proxy.send_message_to_apphunkd("My Message", @opts)
-      end
-    
-      it 'should allow the post to only take 3 seconds to finish' do
-        Apphunk::Remote.should_receive(:post).with(anything, anything, 3)
+      it 'should post the payload' do
+        Postbox.should_receive(:post).with('http://api.apphunk.com/v1/secret/messages', @payload)
         Apphunk::Proxy.send_message_to_apphunkd("My Message", @opts)
       end
     end
@@ -39,28 +35,17 @@ describe Apphunk::Proxy do
     
   describe 'process_response' do
     before(:each) do
-      @result = Apphunk::Remote::Result.new
-      @result.response = mock('Response')
-      Apphunk::Remote.stub!(:post).and_return(@result)
+      @result = OpenStruct.new
     end
     
     it 'should return true if the Proxy return 201, created' do
-      @result.status = :ok
-      @result.response.stub!(:code).and_return("201")
-      Apphunk::Proxy.process_response(@result)
+      @result.success = true
+      Apphunk::Proxy.process_response(@result).should be_true
     end
     
     it 'should output the failure and return false if the Proxy doesn not return 201' do
-      @result.status = :ok
-      @result.response.stub!(:code).and_return("404")
-      @result.response.stub!(:body).and_return("Not found.")
-      Apphunk::Logger.should_receive(:error).with(/Not found/)
-      Apphunk::Proxy.process_response(@result)
-    end
-    
-    it 'should output the failure and return false if the connection to the proxy failed' do
-      @result.status = :connection_error
-      Apphunk::Logger.should_receive(:error).with(/Connection Error/)
+      @result.success = false
+      Apphunk::Logger.should_receive(:error).with(/not store/)
       Apphunk::Proxy.process_response(@result)
     end
   end
@@ -70,7 +55,7 @@ describe Apphunk::Proxy do
       @opts = { :token => 'secret', :environment => 'development', :tags => 'test', :trails => { :user => '5' } }
     end
     
-    it 'should create an OpenStruct, containing the message and extracted options' do
+    it 'should create a Hash, containing the message and extracted options' do
       payload = Apphunk::Proxy.prepare_payload("My Message", @opts)
       payload[:message].should == "My Message"
       payload[:token].should == "secret"

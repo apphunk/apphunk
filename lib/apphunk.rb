@@ -1,11 +1,11 @@
 require 'rubygems'
+require 'postbox'
 
 module Apphunk
   
   autoload :Config, 'apphunk/config'
   autoload :Logger, 'apphunk/logger'
   autoload :Proxy,  'apphunk/proxy'
-  autoload :Remote, 'apphunk/remote'
   
   class << self
 

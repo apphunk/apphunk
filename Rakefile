@@ -6,13 +6,14 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "apphunk"
     gem.summary = %Q{A library that send's messages to Apphunk.com}
-    gem.description = %Q{Apphunk is a library that allows your applications (currently only Ruby AND Rails) to send messages to Apphunk.com}
+    gem.description = %Q{Apphunk is a library that allows your applications to send messages to Apphunk.com}
     gem.email = "andreas@apphunk.com"
     gem.homepage = "http://apphunk.com"
     gem.authors = ["Andreas Wolff"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
     gem.add_dependency "json"
+    gem.add_dependency "postbox", ">= 0.2.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

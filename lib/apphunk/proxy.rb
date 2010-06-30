@@ -1,11 +1,8 @@
 require 'json'
-require 'ostruct'
 
 module Apphunk
   module Proxy
     class << self
-      
-      PROXY_API_URL = "http://127.0.0.1:8212/api/messages"
       
       def send_message_to_apphunkd(message, options)
         if options[:environments] && options[:environment] && !options[:environments].include?(options[:environment])
@@ -13,8 +10,10 @@ module Apphunk
         end
         
         payload = prepare_payload(message, options)
-        result = Apphunk::Remote.post(PROXY_API_URL, payload, 3)
-        return process_response(result)
+        url = generate_api_messages_url(payload[:token])
+        return Postbox.post(url, payload) do |result|
+          process_response(result)
+        end
       end
 
       def prepare_payload(message, options)
@@ -28,19 +27,22 @@ module Apphunk
       end
       
       def process_response(result)
-        if result.status == :ok
-          if result.response.code == '201'
-            return true
-          else
-            Apphunk::Logger.error "The Apphunkd-Proxy couldn't store the message: #{result.response.code} / #{result.response.body}"
-            return false
-          end
+        if result.success == true
+          return true
         else
-          Apphunk::Logger.error "Connection Error: Could not get a response from local Apphunkd-Proxy in time"
+          Apphunk::Logger.error "Could not store message: #{result.response}"
           return false
         end
       end
       
+      
+      protected
+
+      def generate_api_messages_url(token)
+        path = "v1/#{token}/messages"
+        "http://api.apphunk.com/#{path}"
+      end
+ 
     end
   end
 end
